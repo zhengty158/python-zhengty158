@@ -40,57 +40,23 @@ elif gongzhi2 > yuepinggongzhi * 3:
     print('\n解除劳动合同前12个月平均工资高于广州职工平均工资6764元的300%，\n本计算器将采用20292元作为计算基数！\n')
 
 
-if dengji == 10:
-    feilv1 = 7
-    feilv2 = 1
-    feilv3 = 4
+# 根据输入的等级提取计算费率
 
-elif dengji == 9:
-    feilv1 = 9
-    feilv2 = 2
-    feilv3 = 8
+def dengjifeilv():
+    x = dengji - 1
+    feilv = [[0.6,27,0.9],[0.5,25,0.85],[0.4,23,0.8],[0.3,21,0.75],
+             [18,10,50,0.7],[16,8,40,0.6],[13,6,25],[11,4,15],[9,2,8],[7,1,4]]
+    global feilv1
+    global feilv2
+    global feilv3
+    global feilv4
+    feilv1 = feilv[x][0]
+    feilv2 = feilv[x][1]
+    feilv3 = feilv[x][2]
+    if x == 4 or x == 5:
+        feilv4 = feilv[x][3]
 
-elif dengji == 8:
-    feilv1 = 11
-    feilv2 = 4
-    feilv3 = 15
-
-elif dengji == 7:
-    feilv1 = 13
-    feilv2 = 6
-    feilv3 = 25
-
-elif dengji == 6:
-    feilv1 = 16
-    feilv2 = 8
-    feilv3 = 40
-    feilv4 = 0.6
-
-elif dengji == 5:
-    feilv1 = 18
-    feilv2 = 10
-    feilv3 = 50
-    feilv4 = 0.7
-
-elif dengji == 4:
-    feilv1 = 0.3
-    feilv2 = 21
-    feilv3 = 0.75
-
-elif dengji == 3:
-    feilv1 = 0.4
-    feilv2 = 23
-    feilv3 = 0.8
-
-elif dengji == 2:
-    feilv1 = 0.5
-    feilv2 = 25
-    feilv3 = 0.85
-
-elif dengji == 1:
-    feilv1 = 0.6
-    feilv2 = 27
-    feilv3 = 0.9
+dengjifeilv()
 
 def jishuangongshi78910():
     print("\n是否解除劳动合同？")
