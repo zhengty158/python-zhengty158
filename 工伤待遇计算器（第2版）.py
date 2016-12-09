@@ -3,6 +3,7 @@
 # 已增加计算停工留薪期工资的功能：让用户输入工作日天数、停工留薪期实发工资，由电脑计算应发工资、补差额
 # 已增加限定工资计算基数范围的功能：限定工资基数在“社会职工平均工资*60%——社会职工平均工资*300%”之内，并增加字幕提示
 # 已优化排版显示效果、并大幅减少重复代码，函数精简到只有一个
+# 已增加计算护理费功能
 # 还需增加：输出计算结果为txt文档的功能、计算解除劳动合同经济补偿金的功能
 
 print('工伤待遇计算器\n')
@@ -11,6 +12,7 @@ dengji = int(input("请输入伤残等级（数字）："))
 yuepinggongzhi = int('6764')
 huoshibuzhujiage = int('35')
 zhuyuantianshu = float(input('请输入住院天数（数字）：'))
+hulitianshu = int(input('请输入护理天数（数字）：'))
 tinggongliuxinqiyueshu = float(input('\n请输入停工留薪期月数（数字）：'))
 tinggongliuxinqitianshu = int(input('请输入停工留薪期间，\n除完整月份之外的工作日天数（数字）：'))
 tinggongliuxinqishifagongzhi = float(input('请输入停工留薪期实发工资总额（数字）：'))
@@ -63,10 +65,11 @@ def jishuangongshi(x,y):
         print('生活护理费（每月）:',temp2,'元')
         print('一次性伤残补助金：',float('%.2f' % (gongzhi1 * feilv2)),'元')
         print('伤残津贴（每月直至退休）：',float('%.2f' % (gongzhi1 * feilv3)),'元')
+    print('护理费：', hulitianshu * 80, '元', '（广州一般护理费标准认定为80元/日）')
     print('住院伙食补助：',float('%.2f' % (zhuyuantianshu * huoshibuzhujiage)),'元')
     print('停工留薪期待遇（应发）：',float('%.2f' % ((tinggongliuxinqiyueshu * gongzhi1) + tinggongliuxinqitianshu * (gongzhi1 / 21.75))),'元')
     print('停工留薪期待遇（补差额）：',float('%.2f' % ((tinggongliuxinqiyueshu * gongzhi1) + tinggongliuxinqitianshu * (gongzhi1 / 21.75) - tinggongliuxinqishifagongzhi )),'元')
-
+    
 jishuangongshi(dengji,jiechuhetong)
 
 input('\n\n按回车键退出')
