@@ -84,8 +84,12 @@ def Jishuan_Gongshi(x, y):
     g = float('%.2f' % ((TingGongLiuXinQi_YueShu * GongZhi_1) + TingGongLiuXinQi_TianShu * (GongZhi_1 / 21.75) - TingGongLiuXinQi_ShiFaGongZhi ))
     print('停工留薪期待遇（补差额）：', g, '元\n')
     if (x+1) > 4:
-        print('\n以上待遇应发总额为：', float('%.2f' % (a + b + c + d + e + f)), '元')
-        print('\n以上待遇补差总额为：', float('%.2f' % (a + b + c + d + e + g)), '元')
+        if y == 1:
+            print('\n以上待遇应发总额为：', float('%.2f' % (a + b + c + d + e + f)), '元')
+            print('\n以上待遇补差总额为：', float('%.2f' % (a + b + c + d + e + g)), '元')
+        if y == 2:
+            print('\n以上待遇应发总额为：', float('%.2f' % (a + b + c + d + e + f)), '元')
+            print('\n以上待遇补差总额为：', float('%.2f' % (a + b + c + d + e + g)), '元')
     if x == 4 or x == 5:
         print('\n以上待遇应发总额为（不含伤残津贴）：', float('%.2f' % (a + b + c + d + e + f)), '元')
         print('\n以上待遇补差总额为（不含伤残津贴）：', float('%.2f' % (a + b + c + d + e + g)), '元')
