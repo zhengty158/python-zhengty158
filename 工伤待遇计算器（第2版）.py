@@ -88,8 +88,8 @@ def Jishuan_Gongshi(x, y):
             print('\n以上待遇应发总额为：', float('%.2f' % (a + b + c + d + e + f)), '元')
             print('\n以上待遇补差总额为：', float('%.2f' % (a + b + c + d + e + g)), '元')
         if y == 2:
-            print('\n以上待遇应发总额为：', float('%.2f' % (a + b + c + d + e + f)), '元')
-            print('\n以上待遇补差总额为：', float('%.2f' % (a + b + c + d + e + g)), '元')
+            print('\n以上待遇应发总额为：', float('%.2f' % (a + d + e + f)), '元')
+            print('\n以上待遇补差总额为：', float('%.2f' % (a + d + e + g)), '元')
     if x == 4 or x == 5:
         print('\n以上待遇应发总额为（不含伤残津贴）：', float('%.2f' % (a + b + c + d + e + f)), '元')
         print('\n以上待遇补差总额为（不含伤残津贴）：', float('%.2f' % (a + b + c + d + e + g)), '元')
