@@ -7,7 +7,7 @@
 # 还需增加：输出计算结果为txt文档的功能
 
 # 这一版删除了按提示输入工伤情况数据的代码，将其改为由参数获取，然后直接得到计算结果
-# x = 工伤等级   SiFou_JieChu = 是否解除合同（1=是，2=否）  GongZhi_1 = 受伤前12个月平均工资  GongZhi_2 = 解除劳动合同前12个月平均工资
+# DengJi = 工伤等级   SiFou_JieChu = 是否解除合同（1=是，2=否）  GongZhi_1 = 受伤前12个月平均工资  GongZhi_2 = 解除劳动合同前12个月平均工资
 
 def jsq(DengJi, SiFou_JieChu, GongZhi_1, ZhuYuan_TianShu, HuLi_TianShu, TingGongLiuXinQi_YueShu,
         TingGongLiuXinQi_TianShu, TingGongLiuXinQi_ShiFaGongZhi, GongZhi_2):
