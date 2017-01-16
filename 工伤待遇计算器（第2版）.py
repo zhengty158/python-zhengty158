@@ -2,29 +2,30 @@
 # 工伤待遇计算器
 # 该代码适合律师、法务、人力资源管理人员使用
 # 该代码中某些基数使用广州市相关标准（比如上年度职工平均工资），而且是2016年度的，各位使用时请根据所在地区及当年最新相关标准修改
-
+# 已增加重复计算功能
+# 已增加输入提示符
 
 print('\n\n        工伤待遇计算器\n\n')
 
-Deng_Ji = int(input("请输入伤残等级（数字）：\n"))
+Deng_Ji = int(input("请输入伤残等级（数字）：\n>  "))
 
 print('是否解除劳动合同？')
-SiFou_JieChu = int(input('解除请按1，不解除请按2：\n'))
+SiFou_JieChu = int(input('解除请按1，不解除请按2：\n>  '))
 
 # 以下函数为程序核心代码
 def Jishuan_Gongshi(Deng_Ji, SiFou_JieChu):
     # 获取工伤情况的基本资料：
-    GongZhi_1 = float(input("请输入受伤前12个月平均工资（数字）：\n"))
+    GongZhi_1 = float(input("请输入受伤前12个月平均工资（数字）：\n>  "))
     YuePing_GongZhi = int('6764')   # 广州市2016年公布的上年度职工月平均工资
     HuoShiBuZhu_JiaGe = int('35')   # 住院伙食补助标准
-    ZhuYuan_TianShu = float(input('请输入住院天数（数字）：\n'))
-    HuLi_TianShu = int(input('请输入住院护理天数（非生活护理）：\n'))
-    TingGongLiuXinQi_YueShu = float(input('请输入停工留薪期月数（数字）：\n'))
-    TingGongLiuXinQi_TianShu = int(input('请输入停工留薪期间，\n除完整月份之外的工作日天数（数字）：\n'))
-    TingGongLiuXinQi_ShiFaGongZhi = float(input('请输入停工留薪期实发工资总额（数字）：\n'))
+    ZhuYuan_TianShu = float(input('请输入住院天数（数字）：\n>  '))
+    HuLi_TianShu = int(input('请输入住院护理天数（非生活护理）：\n>  '))
+    TingGongLiuXinQi_YueShu = float(input('请输入停工留薪期月数（数字）：\n>  '))
+    TingGongLiuXinQi_TianShu = int(input('请输入停工留薪期间，\n除完整月份之外的工作日天数（数字）：\n>  '))
+    TingGongLiuXinQi_ShiFaGongZhi = float(input('请输入停工留薪期实发工资总额（数字）：\n>  '))
     # 告知用户，并限定工资计算基数在合法范围内：
     if SiFou_JieChu == 1:
-        GongZhi_2 = float(input("\n请输入解除劳动合同前12个月平均工资\n（本计算器将自动比较受伤前工资，\n自动选择较高者作为“一次性工伤医疗补助金”“一次性伤残就业补助金”的计算基数）："))
+        GongZhi_2 = float(input("\n请输入解除劳动合同前12个月平均工资\n（本计算器将自动比较受伤前工资，\n自动选择较高者作为“一次性工伤医疗补助金”“一次性伤残就业补助金”的计算基数）：\n>  "))
         print('\n请注意计算基数的法定范围：\n2016年7月公布的广州职工平均工资6764元')
         print('计算基数必须大于等于4058.4元=6764元×60%')
         print('计算基数必须小于等于20292元=6764元×300%')
@@ -64,7 +65,7 @@ def Jishuan_Gongshi(Deng_Ji, SiFou_JieChu):
         if (SiFou_JieChu == 2) and (DengJi == 4 or DengJi == 5):
                 print('伤残津贴（每月）：',float('%.2f' % (GongZhi_1 * Fei_Lv4)),'元\n')
     elif (Deng_Ji+1) <= 4:
-        ZiLi_ZhangAi = int(input('请输入生活自理障碍程度等级（数字）：'))
+        ZiLi_ZhangAi = int(input('请输入生活自理障碍程度等级（数字）：>  '))
         ZiLi_ZhangAi -= 1
         ShengHuoHuLiFei_DengJi_FeiLv = [0.6, 0.5, 0.4, 0.3]
         temp1 = float('%.2f' % (YuePing_GongZhi * ShengHuoHuLiFei_DengJi_FeiLv[ZiLi_ZhangAi]))
@@ -95,5 +96,18 @@ def Jishuan_Gongshi(Deng_Ji, SiFou_JieChu):
 
     
 Jishuan_Gongshi(Deng_Ji, SiFou_JieChu)
+
+# 可重复计算功能
+print('\n\n是否计算下一个？是=1，否=2')
+SiFou_JiXu = input('>  ')
+
+while SiFou_JiXu == '1':
+    print('\n\n        工伤待遇计算器\n\n')
+    Deng_Ji = int(input("请输入伤残等级（数字）：\n>  "))
+    print('是否解除劳动合同？')
+    SiFou_JieChu = int(input('解除请按1，不解除请按2：\n>  '))
+    Jishuan_Gongshi(Deng_Ji, SiFou_JieChu)
+    print('是否计算下一个？是=1，否=2')
+    SiFou_JiXu = input('>  ')
 
 input('\n\n\n\n按回车键退出')
