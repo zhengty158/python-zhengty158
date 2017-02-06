@@ -4,6 +4,7 @@
 import string
 import random
 
+# 参数x = 生成的密码位数
 def pass_gen(x):
     symbols = '!@#$%^&*()-+=[{}]:";<>\'?\\/,.'
     password = ''.join(random.sample(string.digits + string.ascii_letters + symbols, x))
