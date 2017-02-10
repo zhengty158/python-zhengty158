@@ -5,6 +5,9 @@
 # 已修改重复计算功能（没想到加上while True就行了……之前我还另外写了一个while循环，反而麻烦……）
 # 已增加输入提示符
 # 已改写等级费率的列表为字典，以后查看、修改更方便了
+# 增加开始下一次计算的等待时间
+
+import time
 
 while True:
     
@@ -95,3 +98,6 @@ while True:
             print('\n以上待遇补差总额为（不含伤残津贴）：', float('%.2f' % (a + d + e + g)), '元')
     
     Jishuan_Gongshi(Deng_Ji, SiFou_JieChu)
+    
+    print('\n\n20秒后开始下一次计算………')
+    time.sleep(20)
