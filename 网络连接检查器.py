@@ -14,12 +14,10 @@ if '8.8.8.8' in output_ip.read():
 else:
     print('DNS服务器已被篡改！！！')
 
-# 以下使用ping命令检查网速
-output_Baidu = os.popen('ping www.baidu.com')
-print('\n百度连接速度：%s（平均）' % output_Baidu.readlines()[-1][-5:-1])
+# 以下使用ping命令检查网速和丢包率
+site = {'淘宝':'www.taobao.com', '腾讯':'www.qq.com', '百度':'www.baidu.com'}
 
-output_Taobao = os.popen('ping www.taobao.com')
-print('\n淘宝连接速度：%s（平均）' % output_Taobao.readlines()[-1][-5:-1])
-
-output_Tengxun = os.popen('ping www.qq.com')
-print('\n腾讯连接速度：%s（平均）' % output_Tengxun.readlines()[-1][-5:-1])
+for k, v in site.items():
+    output = os.popen('ping %s' % v)
+    temp = output.readlines()[-3:]
+    print('\n%s连接速度：%s（平均）\n丢包率：%s%%' % (k, temp[-1][-5:-1], temp[-3][-8]))
