@@ -1,8 +1,7 @@
 # 工伤待遇计算器
 # 该程序适合律师、法务、人力资源管理人员使用
 # 该程序中某些基数使用广州市相关标准（比如上年度职工平均工资），而且是2016年度的，各位使用时请根据所在地区及当年最新相关标准修改
-# 已改写部分变量名（a -> temp_a），方便以后查看修改
-# 引用"math"模块，代替笨办法"float('%.2f')"
+# 增加“生活自理障碍程度等级：0级”，方便计算有“生活自理障碍程度等级：未达级”的1~4级伤残人员待遇
 
 # -*- coding: utf-8 -*-
 
@@ -35,7 +34,7 @@ while True:
             elif GongZhi_2 > YuePing_GongZhi * 3:
                 GongZhi_2 = YuePing_GongZhi * 3
                 print('\n解除劳动合同前12个月平均工资高于广州职工平均工资6764元的300%，即20292元！\n')
-            print('根据你输入的受伤前和解除劳动合同前12个月平均工资，和广州职工平均工资，\n本计算器将采用%.2f元作为“一次性工伤医疗补助金”+“一次性伤残就业补助金”的计算基数' % (max(GongZhi_1, GongZhi_2)))
+            print('根据你输入的受伤前和解除劳动合同前12个月平均工资，和广州职工平均工资，\n本计算器将采用{GongZhi}元作为“一次性工伤医疗补助金”+“一次性伤残就业补助金”的计算基数'.format(GongZhi = max(GongZhi_1, GongZhi_2)))
         print('\n请注意计算基数的法定范围：\n2016年7月公布的广州职工平均工资6764元')
         print('计算基数必须大于等于4058.4元=6764元×60%')
         print('计算基数必须小于等于20292元=6764元×300%')
@@ -67,7 +66,7 @@ while True:
                 print('伤残津贴（每月）：',float('%.2f' % (GongZhi_1 * Fei_Lv4)),'元\n')
         elif Deng_Ji <= 4:
             ZiLi_ZhangAi = int(input('请输入生活自理障碍程度等级（数字）：>  '))
-            ShengHuoHuLiFei_DengJi_FeiLv = {'dengji1':0.6, 'dengji2':0.5, 'dengji3':0.4, 'dengji4':0.3}
+            ShengHuoHuLiFei_DengJi_FeiLv = {'dengji0':0, 'dengji1':0.6, 'dengji2':0.5, 'dengji3':0.4, 'dengji4':0.3}    # 字典中增加了'dengji0':0
             temp1 = float('%.2f' % (YuePing_GongZhi * ShengHuoHuLiFei_DengJi_FeiLv['dengji%d' % ZiLi_ZhangAi]))
             print('\n\n根据以上条件计算，工伤待遇为：\n')
             print('生活护理费（每月）:', temp1, '元', '（生活护理费以上年广州职工平均工资为计算基数）\n')
