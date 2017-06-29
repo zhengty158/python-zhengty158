@@ -18,6 +18,7 @@ while True:
     def Jishuan_Gongshi(Deng_Ji, SiFou_JieChu):
         # 获取工伤情况的基本资料：
         GongZhi_1 = float(input("请输入受伤前12个月平均工资（数字）：\n>  "))
+        GongZhi_TingGongLiuXin = GongZhi_1   # 要按工伤前12个月平均实发工资，计算停工留薪期应发工资，并不是按社会职工平均工资的60%-300%
         YuePing_GongZhi = int('6764')   # 广州市2016年公布的上年度职工月平均工资
         HuoShiBuZhu_JiaGe = int('35')   # 住院伙食补助标准
         ZhuYuan_TianShu = float(input('请输入住院天数（数字）：\n>  '))
@@ -76,9 +77,9 @@ while True:
         print('住院护理费：', temp_d, '元', '（广州一般护理费标准认定为80元/日）\n')
         temp_e = ZhuYuan_TianShu * HuoShiBuZhu_JiaGe
         print('住院伙食补助：', temp_e, '元\n')
-        temp_f = (TingGongLiuXinQi_YueShu * GongZhi_1) + TingGongLiuXinQi_TianShu * (GongZhi_1 / 21.75)
+        temp_f = (TingGongLiuXinQi_YueShu * GongZhi_TingGongLiuXin) + TingGongLiuXinQi_TianShu * GongZhi_TingGongLiuXin / 21.75)
         print('停工留薪期待遇（应发）：', temp_f, '元\n')
-        temp_g = (TingGongLiuXinQi_YueShu * GongZhi_1) + TingGongLiuXinQi_TianShu * (GongZhi_1 / 21.75) - TingGongLiuXinQi_ShiFaGongZhi
+        temp_g = (TingGongLiuXinQi_YueShu * GongZhi_TingGongLiuXin) + TingGongLiuXinQi_TianShu * (GongZhi_TingGongLiuXin / 21.75) - TingGongLiuXinQi_ShiFaGongZhi
         print('停工留薪期待遇（补差额）：', temp_g, '元\n')
         if (Deng_Ji > 4) and (SiFou_JieChu == 1):
             print('\n以上待遇应发总额为：', math.fsum([temp_a, temp_b, temp_c, temp_d, temp_e, temp_f]), '元')
