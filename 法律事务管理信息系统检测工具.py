@@ -7,25 +7,20 @@ print('\n\n        法律事务管理信息系统检测工具\n\n')
 print('1、测试法律系统服务器是否正常，请稍等......\n')
 ping = os.popen('ping 138.16.0.88')
 ping_result = ping.readlines()
-keyword_1 = '平均 = (\d+)ms|Average = (\d+)ms'
-keyword_2 = '(\d+)% 丢失|(\d+)% loss'
-ping_time_loss = []
-
-# 从ping命令结果列表中，提取平均连接速度和丢包率
+keyword_1 = '(\d+)% 丢失|(\d+)% loss'
+ping_loss = []
 for n in range(len(ping_result)):
-    ping_time = re.findall(keyword_1, ping_result[n])
-    if ping_time != []:
-        ping_time_loss.append(ping_time[0][0] or ping_time[0][1])
-    ping_loss = re.findall(keyword_2, ping_result[n])
-    if ping_loss != []:
-        ping_time_loss.append(ping_loss[0][0] or ping_loss[0][1])
-print('法律系统服务器，本次连接时间为{time}毫秒（平均），数据包丢失率为{loss}%（平均）'.format(time = ping_time_loss[1], loss = ping_time_loss[0]))
+    loss = re.findall(keyword_1, ping_result[n])
+    if loss != []:
+        ping_loss.append(loss[0][0] or loss[0][1])
+        # 由于可能出现“Request timed out”等ping命令结果，因此不用平均连接时间来做判断
+print('法律系统服务器，本次连接数据包丢失率为{loss}%（平均）'.format(loss = ping_loss[0]))
 time.sleep(random.randint(1, 4))
-if ping_time_loss == ['0', '0']:
+if ping_loss == ['0']:
     print('\n测试结果：与服务器连接正常，服务器运行正常\n\n')
-    # 正常情况下，公司内部局域网连接速度为0ms，丢包率为0%
+    # 公司内部局域网连接速度一般为0ms，丢包率一般为0%
 else:
-    print('\n测试结果：与服务器连接异常，服务器可能未正常运行，应联系科技部同事处理\n\n')
+    print('\n测试结果：与服务器连接异常，服务器可能未正常运行，请联系科技部同事处理\n\n')
 time.sleep(2)
 
 
@@ -45,6 +40,6 @@ if '法律' in readlist[0]:
 else:
     print('测试结果：法律系统首页异常（无法显示）\n\n------------------------------------------------\n\n测试结束，法律系统不能正常使用\n\n现在打开服务器管理系统，可在此重启法律系统服务器.....')
     time.sleep(random.randint(5, 10))
-    # 如果以上测试异常，就进入服务器管理系统重启法律系统服务器
+    # 如果以上测试异常，就进入服务器管理系统重启法律系统服务器和Tomcat
     webbrowser.open('https://10.10.254.10/index')
     input('')
