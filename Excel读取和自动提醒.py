@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-import xlrd
+import xlrd, yagmail
 
 # 可用于理财到期日的自动提醒
 data = xlrd.open_workbook(excel_file)
@@ -22,3 +22,16 @@ for y in col_list:
         pass
     elif '提醒' in str(y):
         # 后面就是自动发邮件了
+        break
+
+def send_mail():
+    # 如果有提醒，就自动发邮件到139邮箱，139邮箱收信后会免费发短信到手机
+    print('\n\n第一次发邮件可能要手动输入密码\n\n')
+    yagmail.register('username', 'password')
+    yag = yagmail.SMTP('username@*******.cn', host='mail.******.cn', port='465')
+    # 收件地址、标题、正文
+    to = '138*******0@139.com'
+    subject = '法律系统报错'
+    body = '法律系统状态异常，请及时查看处理！'
+    # 发送邮件
+    yag.send(to = to, subject = subject, contents = body)
