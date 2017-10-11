@@ -5,38 +5,28 @@ import os, webbrowser, time, re, urllib.request as req, random, urllib.error as 
 
 def send_mail():
     # 如果检测到异常，自动发邮件到139邮箱，139邮箱收信后会免费发短信到手机
-    os.popen(r"C:\Program Files (x86)\Internet Explorer\iexplore.exe")
-    time.sleep(3)
-    webbrowser.open_new_tab('http://mail.********.cn/')  # 打开办公邮箱
-    time.sleep(3)
-    gui.typewrite(['shiftleft'])  # 用于切换输入法
-    time.sleep(1)
-    gui.typewrite('username')
-    gui.typewrite(['tab'] * 2) 
-    gui.typewrite('password')
-    gui.typewrite(['enter'])
-    time.sleep(5)
-
-    # 点击“写邮件”
-    gui.click(60, 237)
-    time.sleep(3)
-    # 收件人
-    gui.click(448, 313)
-    time.sleep(1)
-    gui.typewrite(['shiftleft'])
-    gui.typewrite('138*******0@139.com')
-    # 邮件主题
-    gui.click(448, 346)
-    time.sleep(1)
-    gui.click(449, 346)
-    gui.typewrite('法律系统-错误')
-    # 邮件正文
-    gui.click(414, 445)
-    gui.typewrite('法律系统状态异常，请及时处理！')
-    # 发送
-    gui.click(248, 241)
+    print('\n\n第一次发短信可能要手动输入邮箱密码\n\n')
+    yagmail.register('username', 'password')
+    yag = yagmail.SMTP('username@*******.cn', host='mail.******.cn', port='465')
+    # 收件地址、标题、正文
+    to = '138*******0@139.com'
+    subject = '法律系统报错'
+    body = '法律系统状态异常，请及时查看处理！'
+    # 发送邮件
+    yag.send(to = to, subject = subject, contents = body)
     
 
+def error_report_solve():
+    print('测试结果：法律系统首页异常（无法显示）\n\n')
+    print('------------------------------------------------')
+    print('\n\n测试结束，法律系统不能正常使用\n\n现在发送提醒短信......')
+    send_mail()
+    print('\n\n现在打开服务器管理系统，可在此重启法律系统服务器.....')
+    time.sleep(random.randint(5, 10))
+    # 如果两项测试均异常，就进入服务器管理系统重启法律系统服务器和Tomcat
+    webbrowser.open('https://10.10.248.20/aim/index.jsp')    
+
+    
 def test_lawsys(loop):
     if loop == 1:   # loop == 1: 第一次运行
         print('\n\n        法律事务管理信息系统检测工具\n\n')
@@ -75,18 +65,13 @@ def test_lawsys(loop):
             print('\n\n测试结束，法律系统能正常使用')
         elif loop == 2 and '法律' in readlist[0]:
             pass
+        else:
+            error_report_solve()
     except:
         if loop == 2:
             print('2、测试法律系统首页能否正常访问，请稍等......\n')
-        print('测试结果：法律系统首页异常（无法显示）\n\n')
-        print('------------------------------------------------')
-        print('\n\n测试结束，法律系统不能正常使用\n\n现在发送提醒短信......')
-        send_mail()
-        print('\n\n现在打开服务器管理系统，可在此重启法律系统服务器.....')
-        time.sleep(random.randint(5, 10))
-        # 如果以上测试均异常，就进入服务器管理系统重启法律系统服务器和Tomcat
-        webbrowser.open('https://10.10.254.10/')
-        input('')
+        error_report_solve()
+        input('完毕')
 
 
 test_lawsys(1)
