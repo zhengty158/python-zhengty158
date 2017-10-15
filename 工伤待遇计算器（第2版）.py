@@ -77,7 +77,7 @@ while True:
         print('住院护理费：', temp_d, '元', '（广州一般护理费标准认定为80元/日）\n')
         temp_e = ZhuYuan_TianShu * HuoShiBuZhu_JiaGe
         print('住院伙食补助：', temp_e, '元\n')
-        temp_f = (TingGongLiuXinQi_YueShu * GongZhi_TingGongLiuXin) + TingGongLiuXinQi_TianShu * GongZhi_TingGongLiuXin / 21.75)
+        temp_f = (TingGongLiuXinQi_YueShu * GongZhi_TingGongLiuXin) + TingGongLiuXinQi_TianShu * (GongZhi_TingGongLiuXin / 21.75)
         print('停工留薪期待遇（应发）：', temp_f, '元\n')
         temp_g = (TingGongLiuXinQi_YueShu * GongZhi_TingGongLiuXin) + TingGongLiuXinQi_TianShu * (GongZhi_TingGongLiuXin / 21.75) - TingGongLiuXinQi_ShiFaGongZhi
         print('停工留薪期待遇（补差额）：', temp_g, '元\n')
