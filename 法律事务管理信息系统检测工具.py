@@ -18,7 +18,7 @@ def send_mail():
 
 def error_report_solve():
     print('测试结果：法律系统首页异常（无法显示）\n\n')
-    print('------------------------------------------------')
+    print(''.ljust(50, '-'))   # 分隔符
     print('\n\n测试结束，法律系统不能正常使用\n\n现在发送提醒短信......')
     send_mail()
     print('\n\n现在打开服务器管理系统，可在此重启法律系统服务器.....')
@@ -61,7 +61,7 @@ def test_lawsys(loop):
         if loop == 1 and '法律' in readlist[0]:
             print('测试结果：法律系统首页正常')
             time.sleep(random.randint(1, 4))
-            print('\n-------------------------------------------------')
+            print('\n'.ljust(51, '-'))
             print('\n\n测试结束，法律系统能正常使用')
         elif loop == 2 and '法律' in readlist[0]:
             pass
